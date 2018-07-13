@@ -5,6 +5,7 @@ public class UndirectedGraphTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		// Graph on cormen 635
 		Vertex vertices[] = new Vertex[9];
 		vertices[0] = new Vertex("a");
 		vertices[1] = new Vertex("b");

@@ -55,19 +55,15 @@ public class UndirectedGraph {
 		minQueue.printArray();
 		while(!minQueue.isEmpty()) {
 			Vertex u = minQueue.getSmallest();
-			System.out.println("===========================");
 			System.out.println("Visited node "+u);
 			LinkedList<Edge> adjEdges = this.adjListEdges.get(u);
 			Iterator<Edge> it = adjEdges.iterator();
-			//System.out.println("Adjacent edges");
 			while(it.hasNext()) {
 				Edge edge=it.next();
-				//System.out.println(edge);
 				if(minQueue.containsKey(edge.destination)&&edge.weight<edge.destination.dist) {
 					edge.destination.parent=u;
 					edge.destination.dist=edge.weight;
 					minQueue.buildMinHeap();
-					//minQueue.printArray();
 				}
 			}
 		}
