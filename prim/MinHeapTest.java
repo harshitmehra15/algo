@@ -7,8 +7,7 @@ public class MinHeapTest {
 		MinHeap<Vertex> heap = new MinHeap<Vertex>(vertices);
 		
 		heap.printArray();
-		for(int i=heap.size;i>0;i--) {
-			System.out.println(heap.getSmallest());
-		}
+		
+		System.out.println(heap.containsKey(new Vertex("g",46)));
 	}
 }

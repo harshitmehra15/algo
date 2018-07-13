@@ -13,4 +13,8 @@ public class Edge {
 		this.destination=destination;
 		this.weight=0;
 	}
+	@Override
+	public String toString() {
+		return new String(this.source.name+" --"+this.weight+"-->"+" "+this.destination.name);
+	}
 }

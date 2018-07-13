@@ -30,6 +30,12 @@ public class UndirectedGraph {
 			this.adjListEdges.put(source, new LinkedList<Edge>());
 		}
 		this.adjListEdges.get(source).add(edge);
+		
+		if(!this.adjListEdges.containsKey(destination)) {
+			this.adjListEdges.put(destination, new LinkedList<Edge>());
+		}
+		edge = new Edge(destination,source,weight);
+		this.adjListEdges.get(destination).add(edge);
 	}
 	public void primMST(Vertex root) {
 		this.initializeVertices();
@@ -38,9 +44,32 @@ public class UndirectedGraph {
 			return;
 		}
 		root.dist=0;
-		MinHeap<Vertex> minQueue = new MinHeap<Vertex>((Vertex[]) this.vertices.toArray());
+		Vertex[] verticesArray = new Vertex[this.vertices.size()];
+		Iterator<Vertex> it2 = this.vertices.iterator();
+		int i=0;
+		while(it2.hasNext()) {
+			verticesArray[i]=it2.next();
+			i++;
+		}
+		MinHeap<Vertex> minQueue = new MinHeap<Vertex>(verticesArray);
+		minQueue.printArray();
 		while(!minQueue.isEmpty()) {
-			
+			Vertex u = minQueue.getSmallest();
+			System.out.println("===========================");
+			System.out.println("Visited node "+u);
+			LinkedList<Edge> adjEdges = this.adjListEdges.get(u);
+			Iterator<Edge> it = adjEdges.iterator();
+			//System.out.println("Adjacent edges");
+			while(it.hasNext()) {
+				Edge edge=it.next();
+				//System.out.println(edge);
+				if(minQueue.containsKey(edge.destination)&&edge.weight<edge.destination.dist) {
+					edge.destination.parent=u;
+					edge.destination.dist=edge.weight;
+					minQueue.buildMinHeap();
+					//minQueue.printArray();
+				}
+			}
 		}
 	}
 

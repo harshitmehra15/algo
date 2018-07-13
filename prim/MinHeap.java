@@ -16,7 +16,7 @@ public class MinHeap<E extends Comparable> {
 			this.minHeapify(i);
 		}
 	}
-	private void minHeapify(int i) {
+	public void minHeapify(int i) {
 		// TODO Auto-generated method stub
 		//System.out.println("====recurse : "+i);
 		int left=this.left(i), right=this.right(i);
@@ -67,5 +67,39 @@ public class MinHeap<E extends Comparable> {
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return this.heapSize==0;
+	}
+	public boolean containsKey(E obj) {
+		int i=0;
+		E node = this.findKey(obj,0);
+		//System.out.println(node);
+		if(node==null) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	public E findKey(E obj, int i) {
+		if(obj.compareTo(this.list[i])==0) {
+			return this.list[i];
+		}else if(obj.compareTo(this.list[i])==-1) {
+			return null;
+		}else if(obj.compareTo(this.list[i])==1) {
+			int left=this.left(i), right=this.right(i);
+			E searchLeft=null,searchRight=null;
+			if(left<this.heapSize) {
+				searchLeft=findKey(obj,this.left(i));
+			}
+			if(right<this.heapSize) {
+				searchRight=findKey(obj,this.right(i));
+			}
+			if(searchLeft!=null) {
+				return searchLeft;
+			}
+			if(searchRight!=null) {
+				return searchRight;
+			}
+			return null;
+		}
+		return null;
 	}
 }
